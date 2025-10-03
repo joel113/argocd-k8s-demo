@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-demo
+  labels:
+    app: argocd-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: argocd-demo
+  template:
+    metadata:
+      labels:
+        app: argocd-demo
+    spec:
+      containers:
+        - name: app
+          image: ghcr.io/your-org/argocd-demo:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: APP_ENV
+              value: "base"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 2
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"

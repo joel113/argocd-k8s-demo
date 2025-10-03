@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-demo
+spec:
+  replicas: 3
+  template:
+    spec:
+      containers:
+        - name: app
+          image: ghcr.io/your-org/argocd-demo:prod
+          env:
+            - name: APP_ENV
+              value: "prod"
