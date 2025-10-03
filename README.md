@@ -2,6 +2,8 @@
 
 This repository is a minimal demo showing how to deploy a Java Quarkus app with Argo CD using Kustomize overlays for test, int, and prod stages.
 
+With this project I want to explore the features of [argocd](https://github.com/argoproj/argo-cd).
+
 What is included:
 
 - Minimal Quarkus app (port 8080) that returns JSON {message, env}
